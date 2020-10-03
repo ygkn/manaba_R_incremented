@@ -1,0 +1,9 @@
+{
+  "name": "manaba_R_incremented",
+  "version": "0.0.1",
+  "description": "Enhance manaba+R",
+  "repository": "https://github.com/ygkn/manaba_R_incremented.git",
+  "author": "ygkn <2000ygkn0713@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
