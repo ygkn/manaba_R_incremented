@@ -11,11 +11,15 @@ const contentScripts = manifestJSON.content_scripts
   )
   .filter((fileName) => fileName);
 
+const backgroundScripts = manifestJSON.background.scripts.map(
+  (jsPath) => path.parse(jsPath).name
+);
+
 module.exports = {
   mode: isDev ? 'development' : 'production',
   devtool: isDev && 'source-map',
   entry: Object.fromEntries(
-    [contentScripts]
+    [contentScripts, backgroundScripts]
       .flat()
       .map((distFileName) => [
         distFileName,

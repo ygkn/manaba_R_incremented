@@ -10,5 +10,9 @@
       "run_at": "document_idle",
       "js": ["./js/contentScript.js"]
     }
-  ]
+  ],
+  "background": {
+    "scripts": ["./js/background.js"],
+    "persistent": false
+  }
 }
