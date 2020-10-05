@@ -13,6 +13,7 @@ const contentScripts = manifestJSON.content_scripts
 
 module.exports = {
   mode: isDev ? 'development' : 'production',
+  devtool: isDev && 'source-map',
   entry: Object.fromEntries(
     [contentScripts]
       .flat()
