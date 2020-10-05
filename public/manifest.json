@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "manaba+R++",
+  "version": "0.0.1",
+  "description": "Enhance manaba+R",
+  "author": "ygkn <2000ygkn0713@gmail.com>",
+  "content_scripts": [
+    {
+      "matches": ["https://ct.ritsumei.ac.jp/ct/*"],
+      "run_at": "document_idle",
+      "js": ["./js/contentScript.js"]
+    }
+  ]
+}
