@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "description": "Enhance manaba+R",
   "author": "ygkn <2000ygkn0713@gmail.com>",
+  "permissions": ["https://ct.ritsumei.ac.jp/*", "alarms", "storage"],
   "content_scripts": [
     {
       "matches": ["https://ct.ritsumei.ac.jp/ct/*"],
