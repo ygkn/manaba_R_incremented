@@ -18,6 +18,7 @@ const backgroundScripts = manifestJSON.background.scripts.map(
 module.exports = {
   mode: isDev ? 'development' : 'production',
   devtool: isDev && 'source-map',
+  watch: isDev,
   entry: Object.fromEntries(
     [contentScripts, backgroundScripts]
       .flat()
