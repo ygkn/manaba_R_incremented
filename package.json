@@ -2,6 +2,15 @@
   "name": "manaba_R_incremented",
   "version": "0.0.1",
   "description": "Enhance manaba+R",
+  "scripts": {
+    "dev": "NODE_ENV=dev webpack",
+    "build": "yarn clean && NODE_ENV=prod webpack",
+    "clean": "rimraf dist",
+    "check": "npm-run-all check:* build",
+    "check:type": "tsc",
+    "check:format": "prettier --check src/**/*.ts",
+    "check:lint": "yarn eslint src/**/*.ts"
+  },
   "repository": "https://github.com/ygkn/manaba_R_incremented.git",
   "author": "ygkn <2000ygkn0713@gmail.com>",
   "license": "MIT",
@@ -19,6 +28,7 @@
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.1.2",
     "typescript": "^4.0.3",
     "webpack": "^4.44.2",
