@@ -19,12 +19,10 @@ module.exports = {
   devtool: isDev && 'source-map',
   watch: isDev,
   entry: Object.fromEntries(
-    [contentScripts, backgroundScripts]
-      .flat()
-      .map((distFileName) => [
-        distFileName,
-        path.resolve(__dirname, srcDir, distFileName, 'index.ts'),
-      ])
+    [...contentScripts, ...backgroundScripts].map((distFileName) => [
+      distFileName,
+      path.resolve(__dirname, srcDir, distFileName, 'index.ts'),
+    ])
   ),
   output: {
     path: path.resolve(__dirname, './dist/js'),
