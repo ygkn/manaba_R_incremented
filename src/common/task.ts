@@ -1,10 +1,13 @@
+import dayjs from 'dayjs';
+import { browser } from 'webextension-polyfill-ts';
+
 const taskListURLs = {
   query: 'https://ct.ritsumei.ac.jp/s/home_summary_query',
   survey: 'https://ct.ritsumei.ac.jp/s/home_summary_survey',
   report: 'https://ct.ritsumei.ac.jp/s/home_summary_report',
 } as const;
 
-export type TaskInfo = {
+type TaskInfo = {
   url: string;
   courseUrl: string;
   title: string;
@@ -13,6 +16,8 @@ export type TaskInfo = {
 };
 
 type TaskType = keyof typeof taskListURLs;
+
+type TasksInfo = Record<TaskType, TaskInfo[]>;
 
 const fetchTaskInfo = async (type: TaskType): Promise<TaskInfo[]> => {
   const result = await fetch(taskListURLs[type]);
@@ -43,7 +48,7 @@ const fetchTaskInfo = async (type: TaskType): Promise<TaskInfo[]> => {
   });
 };
 
-export const fetchTasks = async (): Promise<Record<TaskType, TaskInfo>> => {
+export const fetchTasksInfo = async (): Promise<TasksInfo> => {
   const fetching = ([
     'query',
     'survey',
@@ -51,4 +56,19 @@ export const fetchTasks = async (): Promise<Record<TaskType, TaskInfo>> => {
   ] as const).map(async (type) => [type, await fetchTaskInfo(type)]);
 
   return Object.fromEntries(await Promise.all(fetching));
+};
+
+export const saveTasks = async (): Promise<TasksInfo> => {
+  const tasksInfo = await fetchTasksInfo();
+
+  browser.browserAction.setBadgeText({
+    text: Object.values(tasksInfo)
+      .flat()
+      .filter(({ due }) => dayjs(due).diff(dayjs(), 'day') < 7)
+      .length.toString(),
+  });
+
+  browser.storage.local.set({ tasksInfo });
+
+  return tasksInfo;
 };
