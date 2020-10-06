@@ -38,7 +38,3 @@ browser.alarms.onAlarm.addListener((alarm) => {
     lookUp();
   }
 });
-
-browser.storage.onChanged.addListener((...args) =>
-  console.log('storage changed', args)
-);
