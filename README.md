@@ -19,6 +19,24 @@ manaba+R をほんの少し改善 (increment) する **非公式** Google Chrome
 
 実装途中の機能は [enhancement タグが適用された Issue](https://github.com/ygkn/manaba_R_incremented/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement) をご覧ください。
 
+## 使い方
+
+### ソースからビルド
+
+#### 必要なソフトウェア
+
+- Node.js 最新版
+- yarn 最新版
+
+#### ビルド方法
+
+1. このリポジトリの main ブランチを clone する
+2. `yarn install` を実行し、依存パッケージをインストールする
+3. `yarn build` を実行し、ビルドする
+4. 拡張機能ページ (Google Chrome では `chrome://extensions`) を開く
+5. ページ右上の <kbd>Developer mode</kbd> トグルスイッチをオン
+6. <kbd>Load unpacked button</kbd> ボタンをクリックし、 `dist` ディレクトリを選択する
+
 ## 開発
 
 [`package.json`](./package.json) をご覧ください。
