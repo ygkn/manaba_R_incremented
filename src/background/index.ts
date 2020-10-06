@@ -9,6 +9,7 @@ const lookUp = async () => {
 
   if (tasksInfo === undefined) {
     browser.browserAction.setBadgeText({ text: '!' });
+    browser.browserAction.setTitle({ title: '課題の取得に失敗' });
   } else {
     const recentTasksCount = Object.values(tasksInfo)
       .flat()
@@ -16,6 +17,10 @@ const lookUp = async () => {
 
     browser.browserAction.setBadgeText({
       text: recentTasksCount.toString(),
+    });
+
+    browser.browserAction.setTitle({
+      title: `直近の課題: ${recentTasksCount}件`,
     });
   }
 };
