@@ -5,15 +5,14 @@ const manifestJSON = require('./public/manifest.json');
 const srcDir = './src/';
 const isDev = process.env.NODE_ENV === 'dev';
 
-const contentScripts = manifestJSON.content_scripts
-  .flatMap(({ js: jsPaths }) =>
-    jsPaths?.map((jsPath) => path.parse(jsPath).name)
-  )
-  .filter((fileName) => fileName);
+const getJSFileName = (jsPath) => path.parse(jsPath).name;
 
-const backgroundScripts = manifestJSON.background.scripts.map(
-  (jsPath) => path.parse(jsPath).name
-);
+const contentScripts = manifestJSON.content_scripts
+  .filter(({ js }) => js !== undefined)
+  .flatMap(({ js }) => js)
+  .map(getJSFileName);
+
+const backgroundScripts = manifestJSON.background.scripts.map(getJSFileName);
 
 module.exports = {
   mode: isDev ? 'development' : 'production',
