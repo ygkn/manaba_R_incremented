@@ -9,7 +9,10 @@ const lookUp = async () => {
 
   if (tasksInfo === undefined) {
     browser.browserAction.setBadgeText({ text: '!' });
-    browser.browserAction.setTitle({ title: '課題の取得に失敗' });
+    browser.browserAction.setTitle({
+      title:
+        '課題の取得に失敗\n\nmanaba+R にログインしていないか、接続できてない可能性があります',
+    });
   } else {
     const recentTasksCount = Object.values(tasksInfo)
       .flat()
