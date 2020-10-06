@@ -14,7 +14,8 @@ manaba+R をほんの少し改善 (increment) する **非公式** Google Chrome
 
 ## 機能
 
-準備中
+- [x] 「課題一覧」をマイページ、コースページに追加
+- [x] 直近（一週間以内）に提出期限がある課題の数をアイコンに表示
 
 実装途中の機能は [enhancement タグが適用された Issue](https://github.com/ygkn/manaba_R_incremented/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement) をご覧ください。
 
