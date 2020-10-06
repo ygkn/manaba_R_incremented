@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { browser } from 'webextension-polyfill-ts';
 
 const taskListURLs = {
@@ -7,7 +6,7 @@ const taskListURLs = {
   report: 'https://ct.ritsumei.ac.jp/s/home_summary_report',
 } as const;
 
-type TaskInfo = {
+export type TaskInfo = {
   url: string;
   courseUrl: string;
   title: string;
@@ -15,9 +14,9 @@ type TaskInfo = {
   due: string;
 };
 
-type TaskType = keyof typeof taskListURLs;
+export type TaskType = keyof typeof taskListURLs;
 
-type TasksInfo = Record<TaskType, TaskInfo[]>;
+export type TasksInfo = Record<TaskType, TaskInfo[]>;
 
 const fetchTaskInfo = async (type: TaskType): Promise<TaskInfo[]> => {
   const result = await fetch(taskListURLs[type]);
@@ -58,17 +57,6 @@ export const fetchTasksInfo = async (): Promise<TasksInfo> => {
   return Object.fromEntries(await Promise.all(fetching));
 };
 
-export const saveTasks = async (): Promise<TasksInfo> => {
-  const tasksInfo = await fetchTasksInfo();
-
-  browser.browserAction.setBadgeText({
-    text: Object.values(tasksInfo)
-      .flat()
-      .filter(({ due }) => dayjs(due).diff(dayjs(), 'day') < 7)
-      .length.toString(),
-  });
-
-  browser.storage.local.set({ tasksInfo });
-
-  return tasksInfo;
+export const saveTasks = async (tasksInfo: TasksInfo): Promise<void> => {
+  await browser.storage.local.set({ tasksInfo });
 };
