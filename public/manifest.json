@@ -7,9 +7,12 @@
   "permissions": ["https://ct.ritsumei.ac.jp/*", "alarms", "storage"],
   "content_scripts": [
     {
-      "matches": ["https://ct.ritsumei.ac.jp/ct/*"],
+      "matches": [
+        "https://ct.ritsumei.ac.jp/ct/home_course",
+        "https://ct.ritsumei.ac.jp/ct/home"
+      ],
       "run_at": "document_idle",
-      "js": ["./js/contentScript.js"]
+      "js": ["./js/injectTaskList.js"]
     }
   ],
   "background": {
