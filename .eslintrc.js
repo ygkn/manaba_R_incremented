@@ -6,7 +6,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'airbnb-typescript/base',
+    'airbnb-typescript',
     'plugin:prettier/recommended',
     'prettier/@typescript-eslint',
   ],
@@ -17,5 +17,8 @@ module.exports = {
     project: 'tsconfig.json',
   },
   plugins: ['@typescript-eslint'],
-  rules: {},
+  rules: {
+    'react/react-in-jsx-scope': 'off',
+    'import/prefer-default-export': 'off',
+  },
 };
