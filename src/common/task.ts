@@ -57,6 +57,8 @@ export const fetchTasksInfo = async (): Promise<TasksInfo> => {
   return Object.fromEntries(await Promise.all(fetching));
 };
 
-export const saveTasks = async (tasksInfo: TasksInfo): Promise<void> => {
+export const saveTasks = async (
+  tasksInfo: TasksInfo | undefined
+): Promise<void> => {
   await browser.storage.local.set({ tasksInfo });
 };
