@@ -21,21 +21,15 @@ manaba+R をほんの少し改善 (increment) する **非公式** Google Chrome
 
 ## 使い方
 
-### ソースからビルド
+### ダウンロード
 
-#### 必要なソフトウェア
+[Release ページ](https://github.com/ygkn/manaba_R_incremented/releases) から最新のリリースのビルド済み zip ファイルをダウンロードしてください。
 
-- Node.js 最新版
-- yarn 最新版
+### インストール
 
-#### ビルド方法
-
-1. このリポジトリの main ブランチを clone する
-2. `yarn install` を実行し、依存パッケージをインストールする
-3. `yarn build` を実行し、ビルドする
-4. 拡張機能ページ (Google Chrome では `chrome://extensions`) を開く
-5. ページ右上の <kbd>Developer mode</kbd> トグルスイッチをオン
-6. <kbd>Load unpacked button</kbd> ボタンをクリックし、 `dist` ディレクトリを選択する
+1. 拡張機能ページ (Google Chrome では `chrome://extensions`) を開く
+2. ページ右上の <kbd>Developer mode</kbd> トグルスイッチをオンにし、ページをリロードする
+3. ダウンロードしたビルド済み zip ファイルをページ内にドラッグ・アンド・ドロップする
 
 ## 開発
 
