@@ -16,7 +16,7 @@ const lookUp = async () => {
   } else {
     const recentTasksCount = Object.values(tasksInfo)
       .flat()
-      .filter(({ due }) => dayjs(due).diff(dayjs(), 'day') < 7).length;
+      .filter(({ due }) => due && dayjs(due).diff(dayjs(), 'day') < 7).length;
 
     browser.browserAction.setBadgeText({
       text: recentTasksCount.toString(),

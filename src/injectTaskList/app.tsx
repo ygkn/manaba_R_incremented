@@ -62,7 +62,7 @@ const TaskList: FC = () => {
                 .slice(0, showAll ? undefined : 5)
                 .map((task) => (
                   <tr key={task.url}>
-                    <td width="15%">{dayjs(task.due).fromNow()}</td>
+                    <td width="15%">{task.due && dayjs(task.due).fromNow()}</td>
                     <th style={{ backgroundImage: 'none', padding: 0 }}>
                       <div
                         className="news-title newsentry"
@@ -74,8 +74,8 @@ const TaskList: FC = () => {
                           alt="未提出の課題"
                         />
                         <a
-                          href={task.url}
-                          title={task.title}
+                          href={task.url ?? ''}
+                          title={task.title ?? ''}
                           style={{ width: 'auto', display: 'inline' }}
                         >
                           {task.title}
@@ -93,7 +93,9 @@ const TaskList: FC = () => {
                           whiteSpace: 'nowrap',
                         }}
                       >
-                        <a href={task.courseUrl}>{task.course}</a>
+                        {task.course && (
+                          <a href={task.courseUrl ?? ''}>{task.course}</a>
+                        )}
                       </div>
                     </td>
                   </tr>
