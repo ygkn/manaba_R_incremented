@@ -8,8 +8,8 @@
     "clean": "rimraf dist",
     "check": "npm-run-all check:* build",
     "check:type": "tsc",
-    "check:format": "prettier --check src/**/*.ts",
-    "check:lint": "yarn eslint src/**/*.ts"
+    "check:format": "prettier --check src/**/*.ts{x,}",
+    "check:lint": "yarn eslint src/**/*.ts{x,}"
   },
   "repository": "https://github.com/ygkn/manaba_R_incremented.git",
   "author": "ygkn <2000ygkn0713@gmail.com>",
