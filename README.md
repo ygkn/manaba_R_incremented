@@ -1,5 +1,7 @@
 # manaba+R++
 
+![CI](https://github.com/ygkn/manaba_R_incremented/workflows/CI/badge.svg)
+
 > Increment manaba+R.
 
 ## これはなに
