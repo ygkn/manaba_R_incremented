@@ -52,7 +52,22 @@ const TaskList: FC = () => {
           <table>
             <tbody>
               {(openedTab === 0
-                ? Object.values(tasks).flat()
+                ? Object.values(tasks)
+                    .flat()
+                    .sort((a, b) => {
+                      // If `b` is invalid,`b` comes after
+                      // (regardless of whether `a` is valid or not)
+                      if (b.due == null || !dayjs(b.due).isValid) {
+                        return -1;
+                      }
+
+                      // If `a` is invalid,`a` comes after
+                      if (a.due == null || !dayjs(a.due).isValid) {
+                        return 1;
+                      }
+
+                      return dayjs(a.due).diff(b.due);
+                    })
                 : tasks[
                     [undefined, 'query', 'survey', 'report'][
                       openedTab
