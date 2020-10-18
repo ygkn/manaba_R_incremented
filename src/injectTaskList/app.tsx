@@ -78,13 +78,13 @@ const TaskList: FC = () => {
       </ul>
       <div className="my-infolist-body">
         <div className="groupthreadlist" style={{ minHeight: 156 }}>
-          {showingTasks || (
+          {showingTasks == null && (
             <p>
               {/* eslint-disable-next-line react/jsx-one-expression-per-line, jsx-a11y/accessible-emoji */}
               読み込み中です <span aria-hidden="false">&gt; 🐤</span>
             </p>
           )}
-          {showingTasks && showingTasks.length === 0 && (
+          {showingTasks != null && showingTasks.length === 0 && (
             <>
               <p>
                 未提出の課題はありません！
@@ -98,7 +98,7 @@ const TaskList: FC = () => {
               </p>
             </>
           )}
-          {showingTasks && (
+          {showingTasks != null && (
             <table>
               <tbody>
                 {showingTasks.slice(0, showAll ? undefined : 5).map((task) => (
