@@ -39,7 +39,26 @@ const TaskList: FC = () => {
     };
   }, []);
 
-  if (tasks === undefined) return <>loading...</>;
+  const showingTasks =
+    tasks &&
+    (openedTab === 'all'
+      ? Object.values(tasks)
+          .flat()
+          .sort((a, b) => {
+            // If `b` is invalid,`b` comes after
+            // (regardless of whether `a` is valid or not)
+            if (b.due == null || !dayjs(b.due).isValid) {
+              return -1;
+            }
+
+            // If `a` is invalid,`a` comes after
+            if (a.due == null || !dayjs(a.due).isValid) {
+              return 1;
+            }
+
+            return dayjs(a.due).diff(b.due);
+          })
+      : tasks[openedTab]);
 
   return (
     <div className="my-infolist my-infolist-coursenews">
@@ -58,30 +77,11 @@ const TaskList: FC = () => {
         ))}
       </ul>
       <div className="my-infolist-body">
-        <div className="groupthreadlist">
-          <table>
-            <tbody>
-              {(openedTab === 'all'
-                ? Object.values(tasks)
-                    .flat()
-                    .sort((a, b) => {
-                      // If `b` is invalid,`b` comes after
-                      // (regardless of whether `a` is valid or not)
-                      if (b.due == null || !dayjs(b.due).isValid) {
-                        return -1;
-                      }
-
-                      // If `a` is invalid,`a` comes after
-                      if (a.due == null || !dayjs(a.due).isValid) {
-                        return 1;
-                      }
-
-                      return dayjs(a.due).diff(b.due);
-                    })
-                : tasks[openedTab]
-              )
-                .slice(0, showAll ? undefined : 5)
-                .map((task) => (
+        <div className="groupthreadlist" style={{ minHeight: 156 }}>
+          {showingTasks && (
+            <table>
+              <tbody>
+                {showingTasks.slice(0, showAll ? undefined : 5).map((task) => (
                   <tr key={task.url}>
                     <td width="15%">{task.due && dayjs(task.due).fromNow()}</td>
                     <th style={{ backgroundImage: 'none', padding: 0 }}>
@@ -121,8 +121,9 @@ const TaskList: FC = () => {
                     </td>
                   </tr>
                 ))}
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          )}
         </div>
         <div className="showmore">
           <img
