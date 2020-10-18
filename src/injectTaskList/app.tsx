@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import React, { CSSProperties, FC, useEffect, useState } from 'react';
+import { CSSProperties, FC, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { fetchTasksInfo, saveTasks, TasksInfo, TaskType } from '../common/task';
 
