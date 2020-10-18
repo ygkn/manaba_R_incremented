@@ -3,10 +3,17 @@ import React, { FC, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { fetchTasksInfo, saveTasks, TasksInfo, TaskType } from '../common/task';
 
-const tabNames = ['すべて', '小テスト', 'アンケート', 'レポート'] as const;
+type TabKey = TaskType | 'all';
+
+const tabNames = {
+  all: 'すべて',
+  query: '小テスト',
+  survey: 'アンケート',
+  report: 'レポート',
+} as const;
 
 const TaskList: FC = () => {
-  const [openedTab, setOpenedTab] = useState<number>(0);
+  const [openedTab, setOpenedTab] = useState<TabKey>('all');
   const [tasks, setTasks] = useState<TasksInfo | undefined>(undefined);
   const [showAll, setShowAll] = useState<boolean>(false);
 
@@ -40,10 +47,13 @@ const TaskList: FC = () => {
         <h2>課題</h2>
       </div>
       <ul className="infolist-tab">
-        {tabNames.map((tabName, i) => (
-          <li className={openedTab === i ? 'current' : ''} key={tabName}>
+        {(['all', 'query', 'survey', 'report'] as const).map((taskType) => (
+          <li
+            className={taskType === openedTab ? 'current' : ''}
+            key={taskType}
+          >
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid, jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */}
-            <a onClick={() => setOpenedTab(i)}>{tabName}</a>
+            <a onClick={() => setOpenedTab(taskType)}>{tabNames[taskType]}</a>
           </li>
         ))}
       </ul>
@@ -51,7 +61,7 @@ const TaskList: FC = () => {
         <div className="groupthreadlist">
           <table>
             <tbody>
-              {(openedTab === 0
+              {(openedTab === 'all'
                 ? Object.values(tasks)
                     .flat()
                     .sort((a, b) => {
@@ -68,11 +78,7 @@ const TaskList: FC = () => {
 
                       return dayjs(a.due).diff(b.due);
                     })
-                : tasks[
-                    [undefined, 'query', 'survey', 'report'][
-                      openedTab
-                    ] as TaskType
-                  ]
+                : tasks[openedTab]
               )
                 .slice(0, showAll ? undefined : 5)
                 .map((task) => (
