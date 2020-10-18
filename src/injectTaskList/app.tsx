@@ -78,6 +78,26 @@ const TaskList: FC = () => {
       </ul>
       <div className="my-infolist-body">
         <div className="groupthreadlist" style={{ minHeight: 156 }}>
+          {showingTasks || (
+            <p>
+              {/* eslint-disable-next-line react/jsx-one-expression-per-line, jsx-a11y/accessible-emoji */}
+              読み込み中です <span aria-hidden="false">&gt; 🐤</span>
+            </p>
+          )}
+          {showingTasks && showingTasks.length === 0 && (
+            <>
+              <p>
+                未提出の課題はありません！
+                {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
+                <span aria-hidden="false">&gt; 🐤</span>
+              </p>
+              <p>
+                良い一日を！
+                {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
+                <span aria-hidden="false">&gt; 🐑</span>
+              </p>
+            </>
+          )}
           {showingTasks && (
             <table>
               <tbody>
