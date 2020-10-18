@@ -40,7 +40,7 @@ jobs:
       - name: Pack
         run: |
           pushd dist
-          zip dist.zip ./**/*
+          zip dist.zip ./* ./**/*
           popd
 
       - name: Create Release
