@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import React, { FC, useEffect, useState } from 'react';
+import React, { CSSProperties, FC, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { fetchTasksInfo, saveTasks, TasksInfo, TaskType } from '../common/task';
 
@@ -11,6 +11,31 @@ const tabNames = {
   survey: 'アンケート',
   report: 'レポート',
 } as const;
+
+const getRowStyle = (due: string): CSSProperties | undefined => {
+  const daysLeft = dayjs(due).diff(dayjs(), 'day');
+
+  if (daysLeft < 1) {
+    return {
+      backgroundColor: ' hsl(7deg 86% 86%)',
+      color: 'hsl(17deg 46% 33%)',
+    };
+  }
+  if (daysLeft < 3) {
+    return {
+      backgroundColor: ' hsl(47deg 86% 86%)',
+      color: 'hsl(74deg 46% 33%)',
+    };
+  }
+  if (daysLeft < 7) {
+    return {
+      backgroundColor: ' hsl(87deg 86% 86%)',
+      color: 'hsl(134deg 46% 33%)',
+    };
+  }
+
+  return undefined;
+};
 
 const TaskList: FC = () => {
   const [openedTab, setOpenedTab] = useState<TabKey>('all');
@@ -102,8 +127,21 @@ const TaskList: FC = () => {
             <table>
               <tbody>
                 {showingTasks.slice(0, showAll ? undefined : 5).map((task) => (
-                  <tr key={task.url}>
-                    <td width="15%">{task.due && dayjs(task.due).fromNow()}</td>
+                  <tr
+                    key={task.url}
+                    style={task.due != null ? getRowStyle(task.due) : undefined}
+                  >
+                    <td
+                      width="15%"
+                      style={
+                        task.due != null &&
+                        dayjs(task.due).diff(dayjs(), 'day') < 7
+                          ? { fontWeight: 'bold' }
+                          : undefined
+                      }
+                    >
+                      {task.due && dayjs(task.due).fromNow()}
+                    </td>
                     <th style={{ backgroundImage: 'none', padding: 0 }}>
                       <div
                         className="news-title newsentry"
