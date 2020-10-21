@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { CSSProperties, FC, useEffect, useState } from 'react';
+import { CSSProperties, FC, useCallback, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { fetchTasksInfo, saveTasks, TasksInfo, TaskType } from '../common/task';
 
@@ -42,7 +42,17 @@ const TaskList: FC = () => {
   const [tasks, setTasks] = useState<TasksInfo | undefined>(undefined);
   const [showAll, setShowAll] = useState<boolean>(false);
 
+  const toggleShowAll = useCallback(async () => {
+    const newShowAll = !showAll;
+    setShowAll(newShowAll);
+    await browser.storage.local.set({ taskListShowAll: newShowAll });
+  }, [showAll]);
+
   useEffect(() => {
+    browser.storage.local
+      .get('taskListShowAll')
+      .then(({ taskListShowAll }) => setShowAll(taskListShowAll ?? false));
+
     fetchTasksInfo().then((tasksInfo) => {
       setTasks(tasksInfo);
       saveTasks(tasksInfo);
@@ -191,7 +201,7 @@ const TaskList: FC = () => {
             title=""
           />
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a href="#" onClick={() => setShowAll((current) => !current)}>
+          <a href="#" onClick={toggleShowAll}>
             {showAll ? '一部を表示' : 'すべて表示'}
           </a>
         </div>
