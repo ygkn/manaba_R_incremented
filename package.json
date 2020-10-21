@@ -45,8 +45,8 @@
   },
   "dependencies": {
     "dayjs": "^1.9.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "webextension-polyfill-ts": "^0.20.0"
   }
 }
