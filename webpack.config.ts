@@ -1,11 +1,13 @@
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-const manifestJSON = require('./public/manifest.json');
+import path from 'path';
+import CopyPlugin from 'copy-webpack-plugin';
+import type { Configuration } from 'webpack';
+
+import manifestJSON from './public/manifest.json';
 
 const srcDir = './src/';
 const isDev = process.env.NODE_ENV === 'dev';
 
-const getJSFileName = (jsPath) => path.parse(jsPath).name;
+const getJSFileName = (jsPath: string) => path.parse(jsPath).name;
 
 const contentScripts = manifestJSON.content_scripts
   .filter(({ js }) => js !== undefined)
@@ -14,7 +16,7 @@ const contentScripts = manifestJSON.content_scripts
 
 const backgroundScripts = manifestJSON.background.scripts.map(getJSFileName);
 
-module.exports = {
+const config: Configuration = {
   mode: isDev ? 'development' : 'production',
   devtool: isDev && 'source-map',
   watch: isDev,
@@ -48,3 +50,5 @@ module.exports = {
     }),
   ],
 };
+
+export default config;
