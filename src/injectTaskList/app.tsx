@@ -191,11 +191,7 @@ const TaskList: FC = () => {
             title=""
           />
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a
-            // eslint-disable-next-line
-            href="javascript:void(0)"
-            onClick={() => setShowAll((current) => !current)}
-          >
+          <a href="#" onClick={() => setShowAll((current) => !current)}>
             {showAll ? '一部を表示' : 'すべて表示'}
           </a>
         </div>
