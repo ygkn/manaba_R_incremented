@@ -31,6 +31,10 @@ const lookUp = async () => {
 browser.runtime.onInstalled.addListener(() => {
   browser.alarms.create('fetch_manaba+R_tasks', { periodInMinutes: 1 });
   lookUp();
+
+  browser.browserAction.onClicked.addListener(() =>
+    browser.tabs.create({ url: 'https://ct.ritsumei.ac.jp/ct/home_course' })
+  );
 });
 
 browser.alarms.onAlarm.addListener((alarm) => {
