@@ -91,7 +91,18 @@ const TaskList: FC = () => {
               return 1;
             }
 
-            return dayjs(a.due).diff(b.due);
+            const dateDiff = dayjs(a.due).diff(b.due);
+            if (dateDiff === 0) {
+              if (a.course == null || b.course == null) {
+                return -1;
+              }
+              // compare course'name
+              if (a.course > b.course) {
+                return -1;
+              }
+              return 1;
+            }
+            return dateDiff;
           })
       : tasks[openedTab]);
 
