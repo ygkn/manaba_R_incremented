@@ -31,7 +31,8 @@ manaba+R をほんの少し改善 (increment) する **非公式** Google Chrome
 
 1. 拡張機能ページ (Google Chrome では `chrome://extensions`) を開く
 2. ページ右上の <kbd>Developer mode</kbd> トグルスイッチをオンにし、ページをリロードする
-3. ダウンロードしたビルド済み zip ファイルをページ内にドラッグ・アンド・ドロップする
+3. ダウンロードしたビルド済みファイルを展開する
+4. `Load unpacked / パッケージ化されていない拡張機能を読み込む`から展開済みフォルダを選択する
 
 ## 開発
 
