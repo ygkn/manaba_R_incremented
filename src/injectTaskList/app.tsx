@@ -215,7 +215,7 @@ const TaskList: FC = () => {
                     <td>
                       <div
                         className="news-courseinfo"
-                        title="32956:英語上級 109(QX)"
+                        title={task.course ?? undefined}
                         style={{
                           width: 200,
                           overflow: 'hidden',
