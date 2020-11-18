@@ -189,6 +189,7 @@ const TaskList: FC = () => {
                           ? { fontWeight: 'bold' }
                           : undefined
                       }
+                      title={task.due ?? undefined}
                     >
                       {task.due && dayjs(task.due).fromNow()}
                     </td>
