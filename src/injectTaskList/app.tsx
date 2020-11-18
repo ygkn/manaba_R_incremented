@@ -1,7 +1,13 @@
 import dayjs from 'dayjs';
 import { CSSProperties, FC, useCallback, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { fetchTasksInfo, saveTasks, TasksInfo, TaskType } from '../common/task';
+import {
+  fetchTasksInfo,
+  saveTasks,
+  TaskInfo,
+  TasksInfo,
+  TaskType,
+} from '../common/task';
 
 type TabKey = TaskType | 'all';
 
@@ -35,6 +41,59 @@ const getRowStyle = (due: string): CSSProperties | undefined => {
   }
 
   return undefined;
+};
+
+const compare = <T, ValidT extends T>(
+  a: T,
+  b: T,
+  compareFn: (a: ValidT, b: ValidT) => number,
+  isValid: (x: T) => x is ValidT
+): number => {
+  // If `b` is invalid,`b` comes after
+  // (regardless of whether `a` is valid or not)
+  if (!isValid(b)) {
+    return -1;
+  }
+
+  // If `a` is invalid,`a` comes after
+  if (!isValid(a)) {
+    return 1;
+  }
+
+  return compareFn(a, b);
+};
+
+const compareString = (a: string, b: string) =>
+  b.trim().localeCompare(a.trim());
+
+const getTasks = (tasks: TasksInfo, openedTab: TabKey) => {
+  if (openedTab !== 'all') {
+    return tasks[openedTab];
+  }
+
+  return Object.values(tasks)
+    .flat()
+    .sort(
+      (a, b) =>
+        compare<TaskInfo['due'], string>(
+          a.due,
+          b.due,
+          (aDue, bDue) => dayjs(aDue).diff(bDue),
+          (x): x is string => (x != null && dayjs(x).isValid) as boolean
+        ) ||
+        compare<TaskInfo['course'], string>(
+          a.course,
+          b.course,
+          compareString,
+          (x): x is string => x != null
+        ) ||
+        compare<TaskInfo['title'], string>(
+          a.title,
+          b.title,
+          compareString,
+          (x): x is string => x != null
+        )
+    );
 };
 
 const TaskList: FC = () => {
@@ -74,37 +133,7 @@ const TaskList: FC = () => {
     };
   }, []);
 
-  const showingTasks =
-    tasks &&
-    (openedTab === 'all'
-      ? Object.values(tasks)
-          .flat()
-          .sort((a, b) => {
-            // If `b` is invalid,`b` comes after
-            // (regardless of whether `a` is valid or not)
-            if (b.due == null || !dayjs(b.due).isValid) {
-              return -1;
-            }
-
-            // If `a` is invalid,`a` comes after
-            if (a.due == null || !dayjs(a.due).isValid) {
-              return 1;
-            }
-
-            const dateDiff = dayjs(a.due).diff(b.due);
-            if (dateDiff === 0) {
-              if (a.course == null || b.course == null) {
-                return -1;
-              }
-              // compare course'name
-              if (a.course > b.course) {
-                return -1;
-              }
-              return 1;
-            }
-            return dateDiff;
-          })
-      : tasks[openedTab]);
+  const showingTasks = tasks && getTasks(tasks, openedTab);
 
   return (
     <div className="my-infolist my-infolist-coursenews">
