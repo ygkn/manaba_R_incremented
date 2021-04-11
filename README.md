@@ -32,7 +32,11 @@ manaba+R をほんの少し改善 (increment) する **非公式** Google Chrome
 1. 拡張機能ページ (Google Chrome では `chrome://extensions`) を開く
 2. ページ右上の <kbd>Developer mode</kbd> トグルスイッチをオンにし、ページをリロードする
 3. ダウンロードしたビルド済み zip ファイルを展開する
-4. <kbd>Load unpacked</kbd> / <kbd>パッケージ化されていない拡張機能を読み込む</kbd> から展開したフォルダを選択する
+4. 展開後のディレクトリに移動し、以下のコマンドを実行
+  ```shell
+  yarn && yarn build
+  ```
+5. <kbd>Load unpacked</kbd> / <kbd>パッケージ化されていない拡張機能を読み込む</kbd> からビルドで生成した `dist` フォルダを選択する
 
 ## 開発
 
