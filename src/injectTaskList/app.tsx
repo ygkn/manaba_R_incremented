@@ -246,9 +246,9 @@ const TaskList: FC = () => {
           <a href="#" onClick={toggleShowAll}>
             {showAll ? '一部を表示' : 'すべて表示'}
           </a>
-          <ToggleSwitch />
         </div>
       </div>
+      <ToggleSwitch />
     </div>
   );
 };

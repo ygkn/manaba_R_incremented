@@ -2,21 +2,35 @@ import { FC, useEffect, useState } from 'react';
 import { modify } from './modify';
 
 export const ToggleSwitch: FC = () => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    modify(isChecked);
-  }, [isChecked]);
+    modify(isDarkMode);
+  }, [isDarkMode]);
 
   return (
-    <label htmlFor="theme-switch">
-      <input
-        type="checkbox"
-        checked={isChecked}
-        onClick={() => {
-          setIsChecked((prevState) => !prevState);
-        }}
-      />
-    </label>
+    <button
+      type="button"
+      aria-label="toggle switch"
+      onClick={() => {
+        setIsDarkMode((prevState) => !prevState);
+      }}
+      style={{
+        marginLeft: 4,
+        cursor: 'pointer',
+        border: 'none',
+        borderColor: '#9ecf4c',
+      }}
+    >
+      {isDarkMode ? (
+        <span role="img" aria-label="emoji-moon">
+          🌝
+        </span>
+      ) : (
+        <span role="img" aria-label="emoji-sun">
+          🌞
+        </span>
+      )}
+    </button>
   );
 };

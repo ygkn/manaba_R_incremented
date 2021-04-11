@@ -11,7 +11,7 @@ a:link {
 }
 
 .my-infolist-kinkyu .my-infolist-body tr .news-title a {
-  color: #f86262;
+  color: #f86262 !important;
 }
 `;
 
@@ -28,7 +28,7 @@ a:link {
 }
 
 .my-infolist-kinkyu .my-infolist-body tr .news-title a {
-  color: #ff0000;
+  color: #ff0000 !important;
 }
 `;
 
