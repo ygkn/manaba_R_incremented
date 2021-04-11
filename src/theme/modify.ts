@@ -1,36 +1,6 @@
-const DARK_THEME = `
-*,
-#myheader {
-  background: #1a1a1a;
-  color: #ffffff;
-}
-
-a,
-a:link {
-  color: #6084df !important;
-}
-
-.my-infolist-kinkyu .my-infolist-body tr .news-title a {
-  color: #f86262 !important;
-}
-`;
-
-const LIGHT_THEME = `
-*,
-#myheader {
-  background: #ffffff;
-  color: #1a1a1a;
-}
-
-a,
-a:link {
-  color: #2449a8 !important;
-}
-
-.my-infolist-kinkyu .my-infolist-body tr .news-title a {
-  color: #ff0000 !important;
-}
-`;
+/* eslint-disable @typescript-eslint/no-var-requires */
+const DARK_THEME = require('./styles/dark-mode.css').default;
+const LIGHT_THEME = require('./styles/light-mode.css').default;
 
 export const modify = (modifyDarkMode: boolean) => {
   const appendedHTMLStyleElement = document.getElementById('theme-style');

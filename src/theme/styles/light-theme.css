@@ -1,0 +1,14 @@
+*,
+#myheader {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+a,
+a:link {
+  color: #2449a8 !important;
+}
+
+.my-infolist-kinkyu .my-infolist-body tr .news-title a {
+  color: #ff0000 !important;
+}
