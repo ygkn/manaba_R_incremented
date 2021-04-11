@@ -8,6 +8,7 @@ import {
   TasksInfo,
   TaskType,
 } from '../common/task';
+import { ToggleSwitch } from '../theme';
 
 type TabKey = TaskType | 'all';
 
@@ -245,6 +246,7 @@ const TaskList: FC = () => {
           <a href="#" onClick={toggleShowAll}>
             {showAll ? '一部を表示' : 'すべて表示'}
           </a>
+          <ToggleSwitch />
         </div>
       </div>
     </div>
