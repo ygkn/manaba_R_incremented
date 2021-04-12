@@ -42,6 +42,13 @@ const config: Configuration = {
           loader: 'babel-loader',
         },
       },
+      {
+        test: /\.css$/i,
+        exclude: /node_modules/,
+        use: {
+          loader: 'raw-loader',
+        },
+      },
     ],
   },
   plugins: [

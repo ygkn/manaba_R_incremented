@@ -8,6 +8,7 @@ import {
   TasksInfo,
   TaskType,
 } from '../common/task';
+import { ToggleSwitch } from '../theme';
 
 type TabKey = TaskType | 'all';
 
@@ -247,6 +248,7 @@ const TaskList: FC = () => {
           </a>
         </div>
       </div>
+      <ToggleSwitch />
     </div>
   );
 };
