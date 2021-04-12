@@ -5,7 +5,7 @@ export const ToggleSwitch: FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    modify(isDarkMode);
+    modify();
   }, [isDarkMode]);
 
   return (
