@@ -1,54 +1,59 @@
 import path from 'path';
 import CopyPlugin from 'copy-webpack-plugin';
 import type { Configuration } from 'webpack';
+import { z } from 'zod';
 
 import manifestJSON from './public/manifest.json';
 
-const srcDir = './src/';
-const isDev = process.env.NODE_ENV === 'dev';
+const Env = z.object({
+  mode: z.union([z.literal('development'), z.literal('production')]),
+});
 
-const getJSFileName = (jsPath: string) => path.parse(jsPath).name;
+const srcDir = './src/';
 
 const contentScripts = manifestJSON.content_scripts
   .filter(({ js }) => js !== undefined)
   .flatMap(({ js }) => js)
-  .map(getJSFileName);
+  .map((jsPath) => path.parse(jsPath).name);
 
-const backgroundScripts = manifestJSON.background.scripts.map(getJSFileName);
+const config = (env: unknown): Configuration => {
+  const { mode } = Env.parse(env);
 
-const config: Configuration = {
-  mode: isDev ? 'development' : 'production',
-  devtool: isDev && 'source-map',
-  watch: isDev,
-  entry: Object.fromEntries(
-    [...contentScripts, ...backgroundScripts].map((distFileName) => [
-      distFileName,
-      path.resolve(__dirname, srcDir, distFileName, 'index.ts'),
-    ])
-  ),
-  output: {
-    path: path.resolve(__dirname, './dist/js'),
-    filename: '[name].js',
-  },
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
+  return {
+    mode,
+    devtool: mode === 'development' && 'inline-source-map',
+    watch: mode === 'development',
+    entry: Object.fromEntries(
+      [...contentScripts].map((distFileName) => [
+        distFileName,
+        path.resolve(__dirname, srcDir, `${distFileName}.ts`),
+      ])
+    ),
+    output: {
+      path: path.resolve(__dirname, './dist'),
+      filename: '[name].js',
+      clean: mode === 'production',
+    },
+    resolve: {
+      extensions: ['.ts', '.tsx'],
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+          },
         },
-      },
+      ],
+    },
+    plugins: [
+      new CopyPlugin({
+        patterns: [{ from: '**/*', context: 'public' }],
+      }),
     ],
-  },
-  plugins: [
-    new CopyPlugin({
-      patterns: [{ from: 'public', to: '../' }],
-    }),
-  ],
+  };
 };
 
 export default config;

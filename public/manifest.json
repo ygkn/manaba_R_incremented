@@ -1,10 +1,11 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "manaba+R++",
   "version": "0.0.1",
   "description": "Enhance manaba+R",
   "author": "ygkn <2000ygkn0713@gmail.com>",
-  "permissions": ["https://ct.ritsumei.ac.jp/*", "alarms", "storage"],
+  "permissions": ["alarms", "storage"],
+  "host_permissions": ["https://ct.ritsumei.ac.jp/*"],
   "content_scripts": [
     {
       "matches": [
@@ -12,14 +13,10 @@
         "https://ct.ritsumei.ac.jp/ct/home"
       ],
       "run_at": "document_idle",
-      "js": ["./js/injectTaskList.js"]
+      "js": ["injectTaskList.js"]
     }
   ],
-  "background": {
-    "scripts": ["./js/background.js"],
-    "persistent": false
-  },
-  "browser_action": {
+  "action": {
     "default_icon": "icon.png"
   }
 }

@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Enhance manaba+R",
   "scripts": {
-    "dev": "NODE_ENV=dev webpack",
-    "build": "yarn clean && NODE_ENV=prod webpack",
+    "dev": "webpack --env mode=development",
+    "build": "webpack --env mode=production",
     "clean": "rimraf dist",
     "check": "npm-run-all check:*",
     "check:type": "tsc",
