@@ -121,7 +121,6 @@ export const TaskList: FunctionComponent = () => {
 
     const callback: Parameters<typeof chrome.storage.onChanged.addListener>[0] =
       ({ tasksInfo }, areaName) => {
-        console.log({ tasksInfo, areaName });
         if (areaName === 'local' && tasksInfo?.newValue != null) {
           setTasks(tasksInfo.newValue);
         }
