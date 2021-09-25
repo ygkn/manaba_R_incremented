@@ -35,7 +35,7 @@ const config = (env: unknown): Configuration => {
       clean: mode === 'production',
     },
     resolve: {
-      extensions: ['.ts', '.tsx'],
+      extensions: ['.js', '.ts', '.tsx'],
     },
     module: {
       rules: [

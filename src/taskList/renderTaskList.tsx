@@ -1,21 +1,22 @@
 import 'dayjs/locale/ja';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import ReactDOM from 'react-dom';
-
-import { app } from './app';
+import { render } from 'preact';
+import { TaskList } from './TaskList';
 
 dayjs.extend(relativeTime);
 dayjs.locale('ja');
 
+const parentSelector = '.contentbody-left';
+
 const container = document.createElement('div');
 
-const parent = document.querySelector('.contentbody-left');
+const parent = document.querySelector(parentSelector);
 
 if (parent == null) {
-  throw new Error('parent element: `.contentbody-left` does not found.');
+  throw new Error(`parent element: \`${parentSelector}\` does not found.`);
 }
 
 parent.insertBefore(container, parent.children[0]);
 
-ReactDOM.render(app, container);
+render(<TaskList />, container);

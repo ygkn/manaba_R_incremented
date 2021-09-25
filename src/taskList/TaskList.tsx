@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
-import { CSSProperties, FC, useCallback, useEffect, useState } from 'react';
+import { FunctionComponent } from 'preact';
+import { useCallback, useEffect, useState } from 'preact/hooks';
+import { JSXInternal } from 'preact/src/jsx';
 import { browser } from 'webextension-polyfill-ts';
 import {
   fetchTasksInfo,
@@ -7,7 +9,7 @@ import {
   TaskInfo,
   TasksInfo,
   TaskType,
-} from '../common/task';
+} from '../taskInfo';
 
 type TabKey = TaskType | 'all';
 
@@ -18,7 +20,7 @@ const tabNames = {
   report: 'レポート',
 } as const;
 
-const getRowStyle = (due: string): CSSProperties | undefined => {
+const getRowStyle = (due: string): JSXInternal.CSSProperties | undefined => {
   const daysLeft = dayjs(due).diff(dayjs(), 'day');
 
   if (daysLeft < 1) {
@@ -96,7 +98,7 @@ const getTasks = (tasks: TasksInfo, openedTab: TabKey) => {
     );
 };
 
-const TaskList: FC = () => {
+export const TaskList: FunctionComponent = () => {
   const [openedTab, setOpenedTab] = useState<TabKey>('all');
   const [tasks, setTasks] = useState<TasksInfo | undefined>(undefined);
   const [showAll, setShowAll] = useState<boolean>(false);
@@ -250,5 +252,3 @@ const TaskList: FC = () => {
     </div>
   );
 };
-
-export const app = <TaskList />;

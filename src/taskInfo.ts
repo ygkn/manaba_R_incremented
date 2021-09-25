@@ -26,9 +26,7 @@ const fetchTaskInfo = async (type: TaskType): Promise<TaskInfo[]> => {
   const doc = domparser.parseFromString(htmlText, 'text/html');
 
   return Array.from(
-    doc.querySelectorAll(
-      '.querylist > li > a, .reportlist > li > a'
-    ) as NodeListOf<HTMLAnchorElement>
+    doc.querySelectorAll('.querylist > li > a, .reportlist > li > a')
   ).map((a) => {
     const taskPath = a.getAttribute('href');
     const coursePath = taskPath?.replace(/_[a-z]+_[0-9]+/, '');
@@ -48,11 +46,9 @@ const fetchTaskInfo = async (type: TaskType): Promise<TaskInfo[]> => {
 };
 
 export const fetchTasksInfo = async (): Promise<TasksInfo> => {
-  const fetching = ([
-    'query',
-    'survey',
-    'report',
-  ] as const).map(async (type) => [type, await fetchTaskInfo(type)]);
+  const fetching = (['query', 'survey', 'report'] as const).map(
+    async (type) => [type, await fetchTaskInfo(type)]
+  );
 
   return Object.fromEntries(await Promise.all(fetching));
 };
