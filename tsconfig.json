@@ -12,7 +12,7 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "jsx": "preserve",
     "jsxImportSource": "preact",
     "types": ["preact/jsx-runtime", "chrome"]
