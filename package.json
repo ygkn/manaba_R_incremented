@@ -20,6 +20,7 @@
     "@babel/preset-env": "7.15.6",
     "@babel/preset-react": "7.14.5",
     "@babel/preset-typescript": "7.15.0",
+    "@types/chrome": "^0.0.158",
     "@types/copy-webpack-plugin": "8.0.1",
     "@typescript-eslint/eslint-plugin": "4.31.2",
     "@typescript-eslint/parser": "4.31.2",
@@ -44,7 +45,6 @@
   "dependencies": {
     "dayjs": "1.10.7",
     "preact": "^10.5.14",
-    "webextension-polyfill-ts": "0.26.0",
     "zod": "^3.8.2"
   }
 }

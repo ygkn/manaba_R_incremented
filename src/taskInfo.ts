@@ -1,5 +1,3 @@
-import { browser } from 'webextension-polyfill-ts';
-
 const taskListURLs = {
   query: 'https://ct.ritsumei.ac.jp/s/home_summary_query',
   survey: 'https://ct.ritsumei.ac.jp/s/home_summary_survey',
@@ -56,5 +54,5 @@ export const fetchTasksInfo = async (): Promise<TasksInfo> => {
 export const saveTasks = async (
   tasksInfo: TasksInfo | undefined
 ): Promise<void> => {
-  await browser.storage.local.set({ tasksInfo });
+  await chrome.storage.local.set({ tasksInfo });
 };

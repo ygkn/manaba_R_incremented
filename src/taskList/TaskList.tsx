@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 import { FunctionComponent } from 'preact';
 import { useCallback, useEffect, useState } from 'preact/hooks';
 import { JSXInternal } from 'preact/src/jsx';
-import { browser } from 'webextension-polyfill-ts';
 import {
   fetchTasksInfo,
   saveTasks,
@@ -106,11 +105,11 @@ export const TaskList: FunctionComponent = () => {
   const toggleShowAll = useCallback(async () => {
     const newShowAll = !showAll;
     setShowAll(newShowAll);
-    await browser.storage.local.set({ taskListShowAll: newShowAll });
+    await chrome.storage.local.set({ taskListShowAll: newShowAll });
   }, [showAll]);
 
   useEffect(() => {
-    browser.storage.local
+    chrome.storage.local
       .get('taskListShowAll')
       .then(({ taskListShowAll }) => setShowAll(taskListShowAll ?? false));
 
@@ -119,19 +118,18 @@ export const TaskList: FunctionComponent = () => {
       saveTasks(tasksInfo);
     });
 
-    const callback: Parameters<
-      typeof browser.storage.onChanged.addListener
-    >[0] = ({ tasksInfo }, areaName) => {
-      console.log({ tasksInfo, areaName });
-      if (areaName === 'local' && tasksInfo?.newValue != null) {
-        setTasks(tasksInfo.newValue);
-      }
-    };
+    const callback: Parameters<typeof chrome.storage.onChanged.addListener>[0] =
+      ({ tasksInfo }, areaName) => {
+        console.log({ tasksInfo, areaName });
+        if (areaName === 'local' && tasksInfo?.newValue != null) {
+          setTasks(tasksInfo.newValue);
+        }
+      };
 
-    browser.storage.onChanged.addListener(callback);
+    chrome.storage.onChanged.addListener(callback);
 
     return () => {
-      browser.storage.onChanged.removeListener(callback);
+      chrome.storage.onChanged.removeListener(callback);
     };
   }, []);
 

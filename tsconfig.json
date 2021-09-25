@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "jsxImportSource": "preact",
-    "types": ["preact/jsx-runtime"]
+    "types": ["preact/jsx-runtime", "chrome"]
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.tsx"]
