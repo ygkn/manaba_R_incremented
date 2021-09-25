@@ -1,7 +1,8 @@
-import 'dayjs/locale/ja';
 import dayjs from 'dayjs';
+import 'dayjs/locale/ja';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { render } from 'preact';
+
 import { TaskList } from './TaskList';
 
 dayjs.extend(relativeTime);

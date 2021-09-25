@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { FunctionComponent } from 'preact';
 import { useCallback, useEffect, useState } from 'preact/hooks';
 import { JSXInternal } from 'preact/src/jsx';
+
 import {
   fetchTasksInfo,
   saveTasks,
