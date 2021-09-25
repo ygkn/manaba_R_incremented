@@ -1,6 +1,6 @@
 {
   "name": "manaba_R_incremented",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Enhance manaba+R",
   "scripts": {
     "dev": "webpack --env mode=development",

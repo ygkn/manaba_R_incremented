@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "manaba+R++",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Enhance manaba+R",
   "author": "ygkn <2000ygkn0713@gmail.com>",
   "permissions": ["alarms", "storage"],
