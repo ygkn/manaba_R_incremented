@@ -3,13 +3,7 @@ import { FunctionComponent } from 'preact';
 import { useCallback, useEffect, useState } from 'preact/hooks';
 import { JSXInternal } from 'preact/src/jsx';
 
-import {
-  fetchTasksInfo,
-  saveTasks,
-  TaskInfo,
-  TasksInfo,
-  TaskType,
-} from '../taskInfo';
+import { fetchTasksInfo, TaskInfo, TasksInfo, TaskType } from '../taskInfo';
 
 type TabKey = TaskType | 'all';
 
@@ -110,14 +104,9 @@ export const TaskList: FunctionComponent = () => {
   }, [showAll]);
 
   useEffect(() => {
-    chrome.storage.local
-      .get('taskListShowAll')
-      .then(({ taskListShowAll }) => setShowAll(taskListShowAll ?? false));
-
-    fetchTasksInfo().then((tasksInfo) => {
-      setTasks(tasksInfo);
-      saveTasks(tasksInfo);
-    });
+    chrome.storage.local.get('taskListShowAll', ({ taskListShowAll }) =>
+      setShowAll(taskListShowAll ?? false)
+    );
 
     const callback: Parameters<typeof chrome.storage.onChanged.addListener>[0] =
       ({ tasksInfo }, areaName) => {
@@ -131,6 +120,12 @@ export const TaskList: FunctionComponent = () => {
     return () => {
       chrome.storage.onChanged.removeListener(callback);
     };
+  }, []);
+
+  useEffect(() => {
+    fetchTasksInfo().then((tasksInfo) => {
+      setTasks(tasksInfo);
+    });
   }, []);
 
   const showingTasks = tasks && getTasks(tasks, openedTab);
