@@ -28,7 +28,7 @@
     "babel-loader": "8.2.3",
     "copy-webpack-plugin": "10.0.0",
     "core-js": "3.19.1",
-    "eslint": "8.2.0",
+    "eslint": "8.3.0",
     "eslint-config-airbnb": "19.0.0",
     "eslint-config-airbnb-typescript": "16.0.0",
     "eslint-config-prettier": "8.3.0",
