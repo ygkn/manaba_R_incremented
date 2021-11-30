@@ -21,7 +21,7 @@
     "@babel/preset-react": "7.16.0",
     "@babel/preset-typescript": "7.16.0",
     "@trivago/prettier-plugin-sort-imports": "3.1.1",
-    "@types/chrome": "0.0.164",
+    "@types/chrome": "0.0.165",
     "@types/copy-webpack-plugin": "8.0.1",
     "@typescript-eslint/eslint-plugin": "5.5.0",
     "@typescript-eslint/parser": "5.5.0",
