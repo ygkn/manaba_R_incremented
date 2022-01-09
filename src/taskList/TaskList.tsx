@@ -108,12 +108,13 @@ export const TaskList: FunctionComponent = () => {
       setShowAll(taskListShowAll ?? false)
     );
 
-    const callback: Parameters<typeof chrome.storage.onChanged.addListener>[0] =
-      ({ tasksInfo }, areaName) => {
-        if (areaName === 'local' && tasksInfo?.newValue != null) {
-          setTasks(tasksInfo.newValue);
-        }
-      };
+    const callback: Parameters<
+      typeof chrome.storage.onChanged.addListener
+    >[0] = ({ tasksInfo }, areaName) => {
+      if (areaName === 'local' && tasksInfo?.newValue != null) {
+        setTasks(tasksInfo.newValue);
+      }
+    };
 
     chrome.storage.onChanged.addListener(callback);
 
