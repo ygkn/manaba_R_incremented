@@ -13,15 +13,16 @@
         "https://ct.ritsumei.ac.jp/ct/home"
       ],
       "run_at": "document_idle",
-      "js": ["injectTaskList.js"]
+      "js": ["injectTaskList.ts"]
     },
     {
       "matches": ["https://ct.ritsumei.ac.jp/ct/*"],
       "run_at": "document_idle",
-      "js": ["change-title.js"]
+      "js": ["change-title.ts"],
+      "css": ["sticky-querystatus.css"]
     }
   ],
   "action": {
-    "default_icon": "icon.png"
+    "default_icon": "assets/icon.png"
   }
 }
