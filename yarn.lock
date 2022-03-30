@@ -1238,12 +1238,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@preact/preset-vite@^2.1.7":
-  version "2.1.7"
-  resolved "https://registry.yarnpkg.com/@preact/preset-vite/-/preset-vite-2.1.7.tgz#aa019d7c573debf92ced351f101554a770a0dc49"
-  integrity sha512-/Ii+aN1Jm8TK5YzDVrj5UOVRZ91F2Nik1P3FbmZyQ5VJAg1ZCkOBBkmLrz9YhiMbbGl+U35yaZNUDMcO8Xlp2g==
+"@preact/preset-vite@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@preact/preset-vite/-/preset-vite-2.2.0.tgz#ba46b3b211cc3e01d81c83d77fbeecd5c83d0b77"
+  integrity sha512-xOtPzyVSPphUF/tRnzjxkCR/ovbCS6O25ekdCw5MGKcaAkb6PDRo50tS1x2n0+O9qL7Z/qrHJKpyCVn29A4iMg==
   dependencies:
     "@babel/plugin-transform-react-jsx" "^7.14.9"
+    "@babel/plugin-transform-react-jsx-development" "^7.16.7"
     "@prefresh/vite" "^2.2.6"
     "@rollup/pluginutils" "^4.1.1"
     babel-plugin-transform-hook-names "^1.0.2"
