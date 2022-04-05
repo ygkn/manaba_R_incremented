@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "dayjs": "1.10.7",
-    "preact": "10.6.5",
+    "preact": "10.7.1",
     "zod": "3.11.6"
   }
 }
