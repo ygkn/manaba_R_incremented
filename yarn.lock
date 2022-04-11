@@ -1343,10 +1343,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.2.tgz#423c77877d0569db20e1fc80885ac4118314010e"
   integrity sha512-eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==
 
-"@types/chrome@0.0.180":
-  version "0.0.180"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.180.tgz#b7fb831848f6b6c49abffd85410b73037c02381e"
-  integrity sha512-A/CuuKAaHq2CHEpYBAtl0lp2ib7TTXK7VjJI4q+c+1U/HDvZLJ8IlsdEDzzHdvkNdh36bGONxrMnO9YZrKqbAw==
+"@types/chrome@0.0.181":
+  version "0.0.181"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.181.tgz#7357ff121f8844062616707d80ccb069f16f15ed"
+  integrity sha512-34Ln9YVVC8a195ruqWeaty3pouFdCLr9L5kPcbRflQcxnbXQnHor9uETof8OhDf8JLDytSRDiuDsRXYQYQ+9FA==
   dependencies:
     "@types/filesystem" "*"
     "@types/har-format" "*"
