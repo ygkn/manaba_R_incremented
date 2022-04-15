@@ -44,7 +44,7 @@
     "vite-react-jsx": "1.1.2"
   },
   "dependencies": {
-    "dayjs": "1.10.7",
+    "dayjs": "1.11.1",
     "preact": "10.6.5",
     "zod": "3.11.6"
   }
