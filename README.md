@@ -1,6 +1,6 @@
 # manaba+R++
 
-![CI](https://github.com/ygkn/manaba_R_incremented/workflows/CI/badge.svg)
+![code check](https://github.com/ygkn/manaba_R_incremented/workflows/code-check/badge.svg)
 
 > Increment manaba+R.
 
