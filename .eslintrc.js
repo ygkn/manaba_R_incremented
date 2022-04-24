@@ -4,28 +4,23 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'airbnb',
-    'airbnb-typescript',
-    'prettier',
+    "eslint:recommended",
+    "plugin:jsx-a11y/recommended",
+    "preact",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
   ],
-  parser: '@typescript-eslint/parser',
+  settings: {
+    jest: { version: 27 },
+  },
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 12,
-    sourceType: 'module',
-    project: 'tsconfig.json',
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-  plugins: ['@typescript-eslint'],
-  rules: {
-    'react/react-in-jsx-scope': 'off',
-    'import/prefer-default-export': 'off',
-    'react/function-component-definition': [
-      'error',
-      {
-        namedComponents: 'arrow-function',
-        unnamedComponents: 'arrow-function',
-      },
-    ],
-  },
+  plugins: ["@typescript-eslint", "jsx-a11y"],
+  rules: {},
 };

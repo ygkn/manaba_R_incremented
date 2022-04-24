@@ -1,38 +1,38 @@
-import dayjs from 'dayjs';
-import { FunctionComponent } from 'preact';
-import { useCallback, useEffect, useState } from 'preact/hooks';
-import { JSXInternal } from 'preact/src/jsx';
+import dayjs from "dayjs";
+import type { FunctionComponent } from "preact";
+import { useCallback, useEffect, useState } from "preact/hooks";
+import type { JSXInternal } from "preact/src/jsx";
 
-import { fetchTasksInfo, TaskInfo, TasksInfo, TaskType } from '../taskInfo';
+import { fetchTasksInfo, TaskInfo, TasksInfo, TaskType } from "../taskInfo";
 
-type TabKey = TaskType | 'all';
+type TabKey = TaskType | "all";
 
 const tabNames = {
-  all: 'すべて',
-  query: '小テスト',
-  survey: 'アンケート',
-  report: 'レポート',
+  all: "すべて",
+  query: "小テスト",
+  survey: "アンケート",
+  report: "レポート",
 } as const;
 
 const getRowStyle = (due: string): JSXInternal.CSSProperties | undefined => {
-  const daysLeft = dayjs(due).diff(dayjs(), 'day');
+  const daysLeft = dayjs(due).diff(dayjs(), "day");
 
   if (daysLeft < 1) {
     return {
-      backgroundColor: ' hsl(7deg 86% 86%)',
-      color: 'hsl(17deg 46% 33%)',
+      backgroundColor: " hsl(7deg 86% 86%)",
+      color: "hsl(17deg 46% 33%)",
     };
   }
   if (daysLeft < 3) {
     return {
-      backgroundColor: ' hsl(47deg 86% 86%)',
-      color: 'hsl(74deg 46% 33%)',
+      backgroundColor: " hsl(47deg 86% 86%)",
+      color: "hsl(74deg 46% 33%)",
     };
   }
   if (daysLeft < 7) {
     return {
-      backgroundColor: ' hsl(87deg 86% 86%)',
-      color: 'hsl(134deg 46% 33%)',
+      backgroundColor: " hsl(87deg 86% 86%)",
+      color: "hsl(134deg 46% 33%)",
     };
   }
 
@@ -63,7 +63,7 @@ const compareString = (a: string, b: string) =>
   b.trim().localeCompare(a.trim());
 
 const getTasks = (tasks: TasksInfo, openedTab: TabKey) => {
-  if (openedTab !== 'all') {
+  if (openedTab !== "all") {
     return tasks[openedTab];
   }
 
@@ -71,19 +71,19 @@ const getTasks = (tasks: TasksInfo, openedTab: TabKey) => {
     .flat()
     .sort(
       (a, b) =>
-        compare<TaskInfo['due'], string>(
+        compare<TaskInfo["due"], string>(
           a.due,
           b.due,
           (aDue, bDue) => dayjs(aDue).diff(bDue),
           (x): x is string => (x != null && dayjs(x).isValid) as boolean
         ) ||
-        compare<TaskInfo['course'], string>(
+        compare<TaskInfo["course"], string>(
           a.course,
           b.course,
           compareString,
           (x): x is string => x != null
         ) ||
-        compare<TaskInfo['title'], string>(
+        compare<TaskInfo["title"], string>(
           a.title,
           b.title,
           compareString,
@@ -93,7 +93,7 @@ const getTasks = (tasks: TasksInfo, openedTab: TabKey) => {
 };
 
 export const TaskList: FunctionComponent = () => {
-  const [openedTab, setOpenedTab] = useState<TabKey>('all');
+  const [openedTab, setOpenedTab] = useState<TabKey>("all");
   const [tasks, setTasks] = useState<TasksInfo | undefined>(undefined);
   const [showAll, setShowAll] = useState<boolean>(false);
 
@@ -104,14 +104,14 @@ export const TaskList: FunctionComponent = () => {
   }, [showAll]);
 
   useEffect(() => {
-    chrome.storage.local.get('taskListShowAll', ({ taskListShowAll }) =>
+    chrome.storage.local.get("taskListShowAll", ({ taskListShowAll }) =>
       setShowAll(taskListShowAll ?? false)
     );
 
     const callback: Parameters<
       typeof chrome.storage.onChanged.addListener
     >[0] = ({ tasksInfo }, areaName) => {
-      if (areaName === 'local' && tasksInfo?.newValue != null) {
+      if (areaName === "local" && tasksInfo?.newValue != null) {
         setTasks(tasksInfo.newValue);
       }
     };
@@ -137,9 +137,9 @@ export const TaskList: FunctionComponent = () => {
         <h2>課題</h2>
       </div>
       <ul className="infolist-tab">
-        {(['all', 'query', 'survey', 'report'] as const).map((taskType) => (
+        {(["all", "query", "survey", "report"] as const).map((taskType) => (
           <li
-            className={taskType === openedTab ? 'current' : ''}
+            className={taskType === openedTab ? "current" : ""}
             key={taskType}
           >
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid, jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */}
@@ -151,21 +151,18 @@ export const TaskList: FunctionComponent = () => {
         <div className="groupthreadlist" style={{ minHeight: 156 }}>
           {showingTasks == null && (
             <p>
-              {/* eslint-disable-next-line react/jsx-one-expression-per-line, jsx-a11y/accessible-emoji */}
-              読み込み中です <span aria-hidden="false">&gt; 🐤</span>
+              読み込み中です <span aria-hidden>&gt; 🐤</span>
             </p>
           )}
           {showingTasks != null && showingTasks.length === 0 && (
             <>
               <p>
                 未提出の課題はありません！
-                {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
-                <span aria-hidden="false">&gt; 🐤</span>
+                <span aria-hidden>&gt; 🐤</span>
               </p>
               <p>
                 良い一日を！
-                {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
-                <span aria-hidden="false">&gt; 🐑</span>
+                <span aria-hidden>&gt; 🐑</span>
               </p>
             </>
           )}
@@ -181,15 +178,15 @@ export const TaskList: FunctionComponent = () => {
                       width="15%"
                       style={
                         task.due != null &&
-                        dayjs(task.due).diff(dayjs(), 'day') < 7
-                          ? { fontWeight: 'bold' }
+                        dayjs(task.due).diff(dayjs(), "day") < 7
+                          ? { fontWeight: "bold" }
                           : undefined
                       }
                       title={task.due ?? undefined}
                     >
                       {task.due && dayjs(task.due).fromNow()}
                     </td>
-                    <th style={{ backgroundImage: 'none', padding: 0 }}>
+                    <th style={{ backgroundImage: "none", padding: 0 }}>
                       <div
                         className="news-title newsentry"
                         style={{ width: 350 }}
@@ -200,9 +197,9 @@ export const TaskList: FunctionComponent = () => {
                           alt="未提出の課題"
                         />
                         <a
-                          href={task.url ?? ''}
-                          title={task.title ?? ''}
-                          style={{ width: 'auto', display: 'inline' }}
+                          href={task.url ?? ""}
+                          title={task.title ?? ""}
+                          style={{ width: "auto", display: "inline" }}
                         >
                           {task.title}
                         </a>
@@ -214,13 +211,13 @@ export const TaskList: FunctionComponent = () => {
                         title={task.course ?? undefined}
                         style={{
                           width: 200,
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
                         }}
                       >
                         {task.course && (
-                          <a href={task.courseUrl ?? ''}>{task.course}</a>
+                          <a href={task.courseUrl ?? ""}>{task.course}</a>
                         )}
                       </div>
                     </td>
@@ -239,7 +236,7 @@ export const TaskList: FunctionComponent = () => {
           />
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a href="#" onClick={toggleShowAll}>
-            {showAll ? '一部を表示' : 'すべて表示'}
+            {showAll ? "一部を表示" : "すべて表示"}
           </a>
         </div>
       </div>

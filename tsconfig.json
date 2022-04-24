@@ -1,22 +1,30 @@
 {
+  "extends": "@tsconfig/strictest/tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "exactOptionalPropertyTypes": false,
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": false,
+    "noEmit": true,
     "jsx": "preserve",
-    "jsxImportSource": "preact",
-    "types": ["preact/jsx-runtime", "chrome"]
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment"
   },
-  "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "types": [
+    "chrome"
+  ]
 }

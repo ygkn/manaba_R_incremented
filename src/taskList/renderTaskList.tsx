@@ -1,23 +1,29 @@
-import dayjs from 'dayjs';
-import 'dayjs/locale/ja';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import { render } from 'preact';
+import dayjs from "dayjs";
+import "dayjs/locale/ja";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { render } from "preact";
 
-import { TaskList } from './TaskList';
+import { TaskList } from "./TaskList";
 
 dayjs.extend(relativeTime);
-dayjs.locale('ja');
+dayjs.locale("ja");
 
-const parentSelector = '.contentbody-left';
+const parentSelector = ".contentbody-left";
 
-const container = document.createElement('div');
+const container = document.createElement("div");
 
 const parent = document.querySelector(parentSelector);
 
-if (parent == null) {
-  throw new Error(`parent element: \`${parentSelector}\` does not found.`);
+const kinkyuInfo = document.querySelector(
+  ".contentbody-left .my-infolist-kinkyu"
+);
+
+if (parent !== null) {
+  if (kinkyuInfo !== null) {
+    parent.insertBefore(container, kinkyuInfo);
+  } else {
+    parent.prepend(container);
+  }
+
+  render(<TaskList />, container);
 }
-
-parent.insertBefore(container, parent.children[0]);
-
-render(<TaskList />, container);
