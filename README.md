@@ -1,6 +1,6 @@
 # manaba+R++
 
-![code check](https://github.com/ygkn/manaba_R_incremented/workflows/code-check/badge.svg)
+[![.github/workflows/code-check.yml](https://github.com/ygkn/manaba_R_incremented/actions/workflows/code-check.yml/badge.svg)](https://github.com/ygkn/manaba_R_incremented/actions/workflows/code-check.yml)
 
 > Increment manaba+R.
 
