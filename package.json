@@ -34,7 +34,7 @@
     "vite-plugin-chrome-extension": "0.0.7"
   },
   "dependencies": {
-    "dayjs": "1.11.1",
+    "dayjs": "1.11.5",
     "preact": "10.7.1",
     "zod": "3.14.4"
   }
