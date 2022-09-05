@@ -16,7 +16,7 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@preact/preset-vite": "2.3.0",
+    "@preact/preset-vite": "2.3.1",
     "@tsconfig/strictest": "1.0.1",
     "@types/chrome": "0.0.196",
     "@types/node": "17.0.25",
