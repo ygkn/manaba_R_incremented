@@ -1,3 +1,9 @@
+## ⚠ 注意
+
+[@ygkn](https://github.com/ygkn) による manaba+R++ の開発は終了し、このリポジトリはもうメンテナンスされていません。
+
+今後は [xryuseix/manaba_R_incremented](https://github.com/xryuseix/manaba_R_incremented) をご利用ください。
+
 # manaba+R++
 
 [![code check](https://github.com/ygkn/manaba_R_incremented/actions/workflows/code-check.yml/badge.svg)](https://github.com/ygkn/manaba_R_incremented/actions/workflows/code-check.yml)
